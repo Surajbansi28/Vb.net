@@ -1,0 +1,71 @@
+Module Module1
+    Structure game
+        <VBFixedString(40)> Dim name As String
+        Dim amountpaid As Decimal
+        Dim developer As String
+        Dim genre As String
+    End Structure
+
+    Sub Main()
+        Dim gamesdata As game
+        Dim count As Integer
+        Dim recpos As Integer
+        Dim choice As Boolean
+        Dim search As String
+        Dim found As Boolean
+
+        gamesdata.name = " "
+        gamesdata.amountpaid = 0
+        gamesdata.developer = " "
+        gamesdata.genre = " "
+        count = 0
+        recpos = 0
+        search = " "
+
+        FileOpen(1, "games.txt", OpenMode.Random, OpenAccess.ReadWrite, Len(gamesdata))
+        recpos = (LOF(1) / Len(gamesdata))
+        Do
+            Console.WriteLine("Enter name of the game")
+            gamesdata.name = Console.ReadLine
+            Console.WriteLine("Enter amount paid for the game")
+            gamesdata.amountpaid = Console.ReadLine
+            Console.WriteLine("Enter the developer of the game")
+            gamesdata.developer = Console.ReadLine
+            Console.WriteLine("Entery genre of the game")
+            gamesdata.genre = Console.ReadLine
+            FilePut(1, gamesdata, recpos)
+
+            Console.WriteLine("Do you want to add more records to the file")
+            choice = Console.ReadLine
+        Loop Until choice = False
+        FileClose(1)
+
+        FileOpen(1, "games.txt", OpenMode.Random, OpenAccess.ReadWrite, Len(gamesdata))
+        recpos = (LOF(1) / Len(gamesdata))
+        For count = 1 To recpos
+            FileGet(1, gamesdata, recpos)
+        Next
+
+        Console.WriteLine("Enter the game name you want to search for")
+        search = Console.ReadLine
+        found = False
+        FileGet(1, gamesdata, recpos)
+        count = count + 1
+        Do
+            If Trim(UCase(search)) = Trim(UCase(gamesdata.name)) Then
+                found = True
+                Console.WriteLine(gamesdata.name, " ", gamesdata.amountpaid, " ", gamesdata.developer, " ", gamesdata.genre)
+            Else
+                found = False
+                Console.WriteLine("Please enter a valid name for the game")
+            End If
+        Loop Until found = True Or EOF(1)
+        FileClose(1)
+
+        Console.ReadKey()
+
+    End Sub
+
+
+
+End Module
