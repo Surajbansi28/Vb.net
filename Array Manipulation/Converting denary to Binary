@@ -1,0 +1,36 @@
+ Sub Main()
+        Dim binary(8) As Integer
+        Dim i As Integer
+        Dim remainder As Integer
+        Dim denary As Integer
+        Dim count As Integer
+
+        i = 0
+        remainder = 0
+        denary = 0
+        count = 0
+
+        For count = 1 To 8
+            binary(i) = 0
+        Next
+
+        Do
+            Console.WriteLine("enter a valid 128 bit denary number ")
+            denary = Console.ReadLine
+            If denary > 255 Or denary < 0 Then
+                Console.WriteLine(" not a valid denary number. Re enter your number")
+            End If
+        Loop Until denary <= 255 And denary >= 0
+
+        While denary >= 1
+            i = i + 1
+            remainder = denary Mod 2
+            binary(i) = remainder
+            denary = denary / 2
+        End While
+
+        For i = 8 To 1 Step -1
+            Console.WriteLine(binary(i))
+        Next
+
+        Console.ReadKey()
