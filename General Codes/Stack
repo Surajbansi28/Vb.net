@@ -1,0 +1,60 @@
+Module Module1
+    Dim stack(8) As Integer
+    Const fullstack = 8
+    Const nullpointer = -1
+    Const endpointer = 0
+    Dim frontpointer = -1
+
+    Sub Main()
+        Dim choice As Integer
+        Dim value As Integer
+        value = 0
+        choice = 0
+        Do
+            Console.Clear()
+            Console.WriteLine("Enter 1, if you want to add values to the stack")
+            Console.WriteLine("Enter 2, to delete values from the stack")
+            Console.WriteLine("Enter 3, To Quit")
+            Do
+                Console.WriteLine("choose between 1,2 and 3")
+                choice = Console.ReadLine
+            Loop Until choice >= 1 And choice <= 3
+
+            Select Case choice
+                Case 1 : push()
+                Case 2 : value = pop()
+                    If value = -1 Then
+                        Console.WriteLine("Underflow, System actually needs value to be removed :)")
+                    Else
+                        Console.WriteLine("value that is removed :" & value)
+                    End If
+            End Select
+        Loop Until choice = 3
+    End Sub
+
+    Sub push()
+        Dim value As Integer
+        value = 0
+        If frontpointer = fullstack Then
+            Console.WriteLine("Overflow, values cannot be added into the stack")
+            Console.ReadKey()
+        Else
+            Console.WriteLine("Enter value to add to the stack")
+            value = Console.ReadLine
+            frontpointer = frontpointer + 1
+            stack(frontpointer) = value
+        End If
+    End Sub
+
+    Function pop() As Integer
+        Dim value As Integer
+        value = 0
+        If frontpointer = nullpointer Then
+            value = nullpointer
+        Else
+            value = stack(frontpointer)
+            frontpointer = frontpointer - 1
+        End If
+        Return value
+    End Function
+End Module
