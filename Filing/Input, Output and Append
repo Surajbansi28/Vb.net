@@ -1,0 +1,121 @@
+Module Module1
+    Dim game As String
+    Dim developer As String
+    Dim amount As Decimal
+    Dim genre As String
+
+    Sub Main()
+        Dim preference As Integer
+        preference = 0
+        Do
+            Console.WriteLine("Enter 1, To add values to the file")
+            Console.WriteLine("Enter 2, to read values from the file")
+            Console.WriteLine("Enter 3, to append values to the file")
+            Console.WriteLine("Enter 4, to exit")
+
+            Do
+                Console.WriteLine("Enter 1,2,3 or 4")
+                preference = Console.ReadLine
+            Loop Until preference >= 1 And preference <= 4
+
+            Select Case preference
+                Case 1 : Call addition()
+                Case 2 : Call show_me_the_file()
+                Case 3 : Call ammendments()
+            End Select
+        Loop Until preference = 4
+
+
+        Console.ReadKey()
+
+    End Sub
+
+    Sub addition()
+
+        FileOpen(1, "games.txt", OpenMode.Output)
+
+        Dim choice As Boolean
+        Dim str1 As String
+        choice = True
+        str1 = " "
+
+        Do
+            Console.WriteLine("Enter the name of the game")
+            game = Console.ReadLine
+            Console.WriteLine("Enter the developer of the game")
+            developer = Console.ReadLine
+            Console.WriteLine("Enter the amount paid for the game")
+            amount = Console.ReadLine
+            Console.WriteLine("Enter the genre of the game")
+            genre = Console.ReadLine
+
+            PrintLine(1, game)
+            PrintLine(1, developer)
+            PrintLine(1, amount)
+            PrintLine(1, genre)
+
+            Console.WriteLine("Do you want to add more records (Y/N)")
+            str1 = UCase(Console.ReadLine)
+
+            If str1 = "N" Then
+                choice = False
+            End If
+
+        Loop Until choice = False
+        FileClose(1)
+
+    End Sub
+
+
+    Sub show_me_the_file()
+
+        FileOpen(1, "games.txt", OpenMode.Input)
+
+        While Not EOF(1)
+            LineInput(1)
+            LineInput(1)
+            LineInput(1)
+            Console.WriteLine("Name of the game is:" & game)
+            Console.WriteLine("Developer of the game is :" & developer)
+            Console.WriteLine("Amount you paid for the game :" & amount)
+            Console.WriteLine("The category of the game is :" & genre)
+        End While
+        FileClose(1)
+
+    End Sub
+
+    Sub ammendments()
+
+        FileOpen(1, "games.txt", OpenMode.Append)
+
+        Dim choice As Boolean
+        Dim str1 As String
+        choice = True
+        str1 = " "
+
+        Do
+            Console.WriteLine("Enter the name of the game")
+            game = Console.ReadLine
+            Console.WriteLine("Enter the developer of the game")
+            developer = Console.ReadLine
+            Console.WriteLine("Enter the amount paid for the game")
+            amount = Console.ReadLine
+            Console.WriteLine("Enter the genre of the game")
+            genre = Console.ReadLine
+
+            PrintLine(1, game)
+            PrintLine(1, developer)
+            PrintLine(1, amount)
+            PrintLine(1, genre)
+
+            Console.WriteLine("Do you want to add more records (Y/N)")
+            str1 = UCase(Console.ReadLine)
+
+            If str1 = "N" Then
+                choice = False
+            End If
+
+        Loop Until choice = False
+        FileClose(1)
+    End Sub
+End Module
