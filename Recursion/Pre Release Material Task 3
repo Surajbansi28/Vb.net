@@ -1,0 +1,52 @@
+Module Module1
+
+    Sub Main()
+        Call Newyearcountdown(5)
+        Call iterativenewyearcountdown(10)
+        Call sortingstrings("Bansi", 1)
+
+        Console.ReadKey()
+    End Sub
+
+    Sub Newyearcountdown(ByVal value As Integer)
+        If value = 0 Then
+            Console.WriteLine("Happy New Year")
+        Else
+            value = value - 1
+            Console.WriteLine(value)
+            Newyearcountdown(value)
+        End If
+    End Sub
+
+    Sub iterativenewyearcountdown(ByVal value As Integer)
+        Dim count As Integer
+        Dim UB As Integer
+
+        UB = 0
+        count = 0
+        UB = value
+
+        Do
+            count = UB - 1
+            UB = count
+            Console.WriteLine(count)
+        Loop Until UB = 0
+
+        If UB = 0 Then
+            Console.WriteLine("Happy New year")
+        End If
+    End Sub
+
+    Sub sortingstrings(ByVal str As String, ByVal value As Integer)
+
+        Console.WriteLine(Mid(str, value, 1))
+
+        If value = Len(str) Then
+            Exit Sub
+        Else
+            sortingstrings(str, value + 1)
+        End If
+
+    End Sub
+
+End Module
