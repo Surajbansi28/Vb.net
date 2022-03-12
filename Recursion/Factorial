@@ -1,0 +1,14 @@
+Sub Main()
+        Dim X As Integer
+        Call FactR(X)
+
+        Console.ReadKey()
+    End Sub
+
+    Function FactR(ByVal X As Integer) As Integer
+        If X = 1 Then
+            Return X
+        Else
+            Return X * FactR(X - 1)
+        End If
+    End Function
