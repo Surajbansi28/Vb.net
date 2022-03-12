@@ -1,0 +1,37 @@
+Sub Main()
+        Dim thisarray(8) As Integer
+        Dim temp As Integer
+        Dim y As Integer
+        Dim x As Integer
+        Dim count As Integer
+
+        temp = 0
+        y = 0
+        x = 0
+        count = 0
+
+        For count = 1 To 7
+            Console.WriteLine("Enter values to be sorted")
+            thisarray(count) = Console.ReadLine
+        Next
+
+        For x = 2 To 7
+            For y = 1 To (x - 1)
+                If thisarray(x) < thisarray(y) Then
+                    temp = thisarray(x)
+                    For count = x To (y - 1) Step -1
+                        thisarray(count) = thisarray(count - 1)
+                    Next
+                    thisarray(y) = temp
+                    Exit For
+                End If
+            Next
+        Next
+
+        For count = 1 To 7
+            Console.WriteLine(thisarray(count))
+        Next
+
+        Console.ReadKey()
+
+    End Sub
