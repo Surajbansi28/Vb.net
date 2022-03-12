@@ -1,0 +1,39 @@
+ Sub Main()
+        Dim i As Integer
+        Dim j As Integer
+        Dim myARR(5) As Integer
+        Dim x As Integer
+        Dim found As Boolean
+
+        found = True
+        x = 0
+        i = 0
+        j = 0
+        For i = 1 To 5
+            myArr(i) = 0
+        Next
+
+        For i = 1 To 5
+            Console.WriteLine(" Input a number to insert in array")
+            x = Console.ReadLine
+            myArr(i) = x
+        Next
+
+        For j = 4 To 1 Step -1
+            found = True
+            For i = 1 To j
+                If x = myARR(i) Then
+                    myARR(i) = myARR(i + 1)
+                    myARR(i + 1) = x
+                    found = False
+                End If
+            Next
+            If found = True Then
+                Exit For
+            End If
+        Next
+
+        Console.WriteLine(myARR)
+            Console.ReadKey()
+
+    End Sub
