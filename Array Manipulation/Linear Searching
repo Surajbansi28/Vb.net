@@ -1,0 +1,29 @@
+Sub Main()
+        Dim Search(5) As Integer
+        Dim found As Boolean
+        Dim x As String
+        Dim i As Integer
+
+        found = True
+        x = " "
+        i = 0
+
+        Console.WriteLine(" Enter number to search for ")
+        x = Console.ReadLine
+        For i = 1 To 5
+            If Search(i) = x Then
+                found = True
+            End If
+        Next
+
+        If found = True Then
+            Console.WriteLine(x & " is found ")
+        Else
+            Console.WriteLine(x & " is not found ")
+        End If
+    End Sub
+© 2022 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
