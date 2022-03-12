@@ -1,40 +1,87 @@
-Sub Main()
-        Dim GRNO As Integer
-        Dim isfeepaid As Boolean
-        Dim name As String
-        Dim fee As Decimal
-        Dim sclass As String
-        Dim more As Boolean
+Dim title As String
+    Dim author As String
+    Dim ISBN As Integer
+    Dim price As Decimal
 
-        GRNO = 0
-        isfeepaid = False
-        name = ""
-        fee = 0
-        sclass = ""
-        more = False
-
-        FileOpen(1, "Students.txt", OpenMode.Append)
+    Sub Main()
+        Dim preference As Integer
+        preference = 0
         Do
-            Console.WriteLine("Enter GR NO :")
-            GRNO = Console.ReadLine
-            Console.WriteLine("Enter name :")
-            name = Console.ReadLine
-            Console.WriteLine("Enter class :")
-            sclass = Console.ReadLine
-            Console.WriteLine("Enter fee :")
-            fee = Console.ReadLine
-            Console.WriteLine("Enter if the fee paid or not")
-            isfeepaid = Console.ReadLine
+            Console.WriteLine("Enter 1, If you want to add records to the file")
+            Console.WriteLine("Enter 2, If you want to read records from the file")
+            Console.WriteLine("Enter 3, If you want to search for a record in the file")
+            Console.WriteLine("Enter 4, To exit")
+            Do
+                Console.WriteLine("Enter your preference 1,2,3 or 4")
+                preference = Console.ReadLine
+            Loop Until preference >= 1 And preference <= 4
+            Select Case preference
+                Case 1 : Call addbooks()
+                Case 2 : Call readbooks()
+                Case 3 : Call searchfile()
+            End Select
+        Loop Until preference = 4
 
-            PrintLine(1, GRNO)
-            PrintLine(1, name)
-            PrintLine(1, sclass)
-            PrintLine(1, fee)
-            PrintLine(1, isfeepaid)
+        Console.ReadKey()
 
-            Console.WriteLine("Do you want to continue adding records")
-            more = Console.ReadLine
+    End Sub
 
-        Loop Until more = False
+    Sub addbooks()
+        Dim choice As Boolean
+        FileOpen(1, "books.txt", OpenMode.Output)
+        Console.WriteLine("please enter the new book details")
+            Do
+                Console.WriteLine("Enter the title of the book")
+                title = Console.ReadLine
+                Console.WriteLine("Enter the author of the book")
+                author = Console.ReadLine
+                Console.WriteLine("Enter the ISBN number of the book")
+                ISBN = Console.ReadLine
+                Console.WriteLine("Enter the price of the book")
+            price = Console.ReadLine
 
+            PrintLine(1, title)
+            PrintLine(1, author)
+            PrintLine(1, ISBN)
+            PrintLine(1, price)
+
+                Console.WriteLine(" Do you want to add more records (True/False)")
+                choice = Console.ReadLine
+
+            Loop Until choice = False
+        FileClose(1)
+  
+    End Sub
+
+    Sub readbooks()
+        FileOpen(1, "books.txt", OpenMode.Input)
+        While Not EOF(1)
+            LineInput(1)
+            LineInput(1)
+            LineInput(1)
+            LineInput(1)
+            Console.WriteLine("Title of the book is= " & title)
+            Console.WriteLine("Author of the book is = " & author)
+            Console.WriteLine("ISBN number is = " & ISBN)
+            Console.WriteLine("price of the book is= " & price)
+        End While
+        FileClose(1)
+    End Sub
+
+    Sub searchfile()
+        Dim filesearched As String
+        filesearched = " "
+        FileOpen(1, "books.txt", OpenMode.Input)
+        Console.WriteLine("Enter the file you want to search for")
+        filesearched = Console.ReadLine
+        If filesearched = author Then
+            author = filesearched
+            Do
+                Console.WriteLine("Name of books by this author are :")
+                Console.WriteLine(title)
+            Loop Until EOF(1)
+        Else
+            Console.WriteLine("Author not found")
+        End If
+        FileClose(1)
     End Sub
