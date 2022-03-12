@@ -1,0 +1,38 @@
+Sub Main()
+        Dim i As Integer
+        Dim j As Integer
+        Dim k As Integer
+        Dim sa(5) As Integer
+        Dim x As Integer
+
+        i = 0
+        j = 0
+        k = 0
+        x = 0
+
+        For i = 0 To 4
+            sa(i) = 0
+        Next
+
+        For i = 0 To 4
+            sa(i) = Console.ReadLine
+        Next
+
+        For i = 0 To 4
+            For j = 1 To (i - 1)
+                If sa(i) < sa(j) Then
+                    x = sa(i)
+                    For k = i To (j + 1)
+                        sa(k) = sa(k - 1)
+                    Next k
+                    sa(j) = x
+                    Exit For
+                End If
+            Next j
+        Next i
+
+        Console.WriteLine(sa(i))
+
+        Console.ReadKey()
+
+    End Sub
