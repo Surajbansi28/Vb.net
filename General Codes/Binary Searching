@@ -1,0 +1,31 @@
+Function binarysearch(ByVal thisarray() As Char, ByVal lb As Integer, ByVal ub As Integer, ByVal value As Char) As Integer
+        Dim middle As Integer
+        middle = 0
+        If lb > ub Then
+            Return -1
+        Else
+            middle = Int((ub + lb) / 2)
+            Select Case thisarray(middle)
+                Case Is = value : Return middle
+                Case Is > value : Return binarysearch(thisarray, lb, middle - 1, value)
+                Case Is < value : Return binarysearch(thisarray, middle + 1, ub, value)
+            End Select
+        End If
+    End Function
+
+    Sub Main()
+        Dim thisarray() As Char = {" ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j"}
+        Dim result As Integer
+        Dim value As Char
+        Console.WriteLine("Enter value b/w a and j")
+        value = Console.ReadLine
+        result = binarysearch(thisarray, 1, 10, value)
+        If result = -1 Then
+            Console.WriteLine("not found")
+        Else
+            Console.WriteLine("found")
+        End If
+
+        Console.ReadKey()
+
+    End Sub
