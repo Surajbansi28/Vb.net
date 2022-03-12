@@ -1,0 +1,86 @@
+Dim queue(5) As Integer
+    Dim frontQ As Integer
+    Dim fullQ As Boolean
+    Dim emptyQ As Boolean
+    Dim endQ As Integer
+    Const nullpointer = -1
+    Const UB = 5
+    Const LB = 0
+
+    Sub Main()
+        Dim choice As Integer
+        Dim value As Integer
+        choice = 0
+        value = 0
+        emptyQ = True
+        fullQ = False
+
+        Do
+            Console.WriteLine("Enter 1, if you want to add value to the queue")
+            Console.WriteLine("Enter 2, if you want to delete the value from the queue")
+            Console.WriteLine("Enter 3 to exit")
+
+            Do
+                Console.WriteLine("choose b/w 1, 2 or 3")
+                choice = Console.ReadLine
+            Loop Until choice <= 3 And choice >= 1
+
+            Select Case choice
+                Case 1
+                    Console.WriteLine("Enter the value you want to add to the queue")
+                    value = Console.ReadLine
+                    Call addQ(value)
+                Case 2
+                    value = deleteQ()
+                    If value = nullpointer Then
+                        Console.WriteLine("Underflow, system cannot delete values further in this data structure")
+                    Else
+                        Console.WriteLine("Value deleted :" & value)
+                    End If
+            End Select
+        Loop Until choice = 3
+
+        Console.ReadKey()
+
+    End Sub
+
+    Sub addQ(ByVal value As Integer)
+        If fullQ = True Then
+            Console.WriteLine("overflow, system cannot add further into this data structure")
+        Else
+            If endQ = UB And frontQ > nullpointer Then
+                endQ = LB
+            Else
+                endQ = endQ + 1
+            End If
+            queue(endQ) = value
+            emptyQ = False
+            If frontQ = endQ Or endQ = UB And frontQ = nullpointer Then
+                fullQ = True
+            End If
+        End If
+        Console.ReadKey()
+    End Sub
+
+    Function deleteQ() As Integer
+        Dim value As Integer
+        value = 0
+        If emptyQ = True Then
+            value = nullpointer
+        Else
+            If frontQ = UB Then
+                frontQ = LB
+            Else
+                frontQ = frontQ + 1
+            End If
+            value = queue(frontQ)
+            emptyQ = False
+            If frontQ = endQ Then
+                emptyQ = True
+            End If
+        End If
+        Return value
+    End Function
+
+
+End Module
