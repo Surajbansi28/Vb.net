@@ -1,0 +1,35 @@
+Sub Main()
+        Dim Boundary As Integer
+        Dim Username(100) As String
+        Dim i As Integer
+        Dim FirstID As String
+        Dim SecondID As String
+        Dim NoSwaps As Boolean
+        Dim Temp As String
+
+        Boundary = 99
+        i = 0
+        FirstID = " "
+        SecondID = " "
+        NoSwaps = True
+        Temp = " "
+
+        Do
+            Console.WriteLine(" Enter Student ID ")
+            FirstID = Console.ReadLine
+            Console.WriteLine(" Enter Second ID ")
+            SecondID = Console.ReadLine
+            For i = 1 To Boundary
+                FirstID = Username(i)
+                SecondID = Username(i + 1)
+                If FirstID > SecondID Then
+                    Temp = FirstID
+                    Username(i) = Username(i + 1)
+                    Username(i + 1) = Temp
+                    NoSwaps = False
+                End If
+            Next
+        Loop Until NoSwaps = True
+
+        Console.ReadKey()
+    End Sub
