@@ -1,0 +1,40 @@
+Sub Main()
+        Dim GRNO As Integer
+        Dim isfeepaid As Boolean
+        Dim name As String
+        Dim fee As Decimal
+        Dim sclass As String
+        Dim more As Boolean
+
+        GRNO = 0
+        isfeepaid = False
+        name = ""
+        fee = 0
+        sclass = ""
+        more = False
+
+        FileOpen(1, "Students.txt", OpenMode.Append)
+        Do
+            Console.WriteLine("Enter GR NO :")
+            GRNO = Console.ReadLine
+            Console.WriteLine("Enter name :")
+            name = Console.ReadLine
+            Console.WriteLine("Enter class :")
+            sclass = Console.ReadLine
+            Console.WriteLine("Enter fee :")
+            fee = Console.ReadLine
+            Console.WriteLine("Enter if the fee paid or not")
+            isfeepaid = Console.ReadLine
+
+            PrintLine(1, GRNO)
+            PrintLine(1, name)
+            PrintLine(1, sclass)
+            PrintLine(1, fee)
+            PrintLine(1, isfeepaid)
+
+            Console.WriteLine("Do you want to continue adding records")
+            more = Console.ReadLine
+
+        Loop Until more = False
+
+    End Sub
