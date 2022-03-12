@@ -1,0 +1,84 @@
+Structure member
+        <VBFixedString(40)> Dim name As String
+        Dim ID As Integer
+    End Structure
+
+    Structure Newdatamembers
+        <VBFixedString(40)> Dim name As String
+        Dim ID As String
+        Dim Telephone_NO As Integer
+        Dim startdate As Date
+    End Structure
+
+    Sub Main()
+        Dim sportsmem As member
+        Dim recpos As Integer
+        Dim count As Integer
+        Dim choice As Boolean
+        Dim search As String
+        Dim found As Boolean
+        Dim newdata As Newdatamembers
+
+        sportsmem.name = " "
+        sportsmem.ID = 0
+        count = 0
+        recpos = 0
+        choice = False
+        search = " "
+        found = False
+        newdata.Telephone_NO = 0
+
+        FileOpen(1, "E:\sportsclubmembers.dat", OpenMode.Random, OpenAccess.ReadWrite, Len(sportsmem))
+        recpos = (LOF(1) / Len(sportsmem))
+        Do
+            Console.WriteLine(" Enter name of the member ")
+            sportsmem.name = Console.ReadLine
+            Console.WriteLine(" Enter ID of the member ")
+            sportsmem.ID = Console.ReadLine
+            FilePut(1, sportsmem, recpos)
+            Console.WriteLine(" Do you want to continue adding records? ")
+            choice = Console.ReadLine
+        Loop Until choice = False       
+        FileClose(1)
+
+        FileOpen(1, "E:\sportsclubmembers.dat", OpenMode.Random, OpenAccess.ReadWrite, Len(sportsmem))
+        recpos = (LOF(1) / Len(sportsmem))
+        For count = 1 To recpos
+            FileGet(1, sportsmem, count)
+            Console.WriteLine(sportsmem.name & " " & sportsmem.ID)
+        Next
+        Console.WriteLine(" Enter name of the member you want to search for ")
+        search = Console.ReadLine
+        Do
+            found = False
+            count = count + 1
+            FileGet(1, sportsmem, count)
+            If Trim(UCase(search)) = Trim(UCase(sportsmem.name)) Then
+                found = True
+                Console.WriteLine(sportsmem.name & " " & sportsmem.ID)
+            Else : found = False
+                Console.WriteLine(" Enter a valid name to search for ")
+            End If
+        Loop Until EOF(1) Or found = False
+        FileClose(1)
+
+        FileOpen(2, "E:\Newdata.dat", OpenMode.Random, OpenAccess.ReadWrite, Len(newdata))
+        Do
+            choice = True
+            Console.WriteLine("Enter name of the member")
+            newdata.name = Console.ReadLine
+            Console.WriteLine("Enter ID of the member")
+            newdata.ID = Console.ReadLine
+            Console.WriteLine("Enter telephone number of the member")
+            newdata.Telephone_NO = Console.ReadLine
+            Console.WriteLine("Enter start date of the member ")
+            newdata.startdate = Console.ReadLine
+            recpos = (LOF(1) / Len(newdata))
+            FilePut(2, newdata, recpos)
+            Console.WriteLine(" Do you want to continue adding records? ")
+            choice = Console.ReadLine
+        Loop Until choice = False
+
+        Console.ReadKey()
+
+    End Sub
