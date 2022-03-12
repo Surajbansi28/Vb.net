@@ -1,0 +1,37 @@
+ Sub Main()
+        Dim count As Integer
+        Dim alphabet(25) As Integer
+        Dim phrase As String
+        Dim i As Integer
+        Dim Nextchar As Char
+        Dim x As Integer
+
+        count = 0
+        phrase = " "
+        i = 0
+        Nextchar = " "
+        x = 0
+
+        For i = 1 To 26
+            alphabet(i) = 1
+        Next
+
+        phrase = Console.ReadLine
+
+        For i = 1 To Len(phrase)
+            phrase = UCase(phrase)
+            Nextchar = Mid(phrase, i, 1)
+            x = Asc(Nextchar)
+            x = x - 64
+            alphabet(x) = alphabet(x) + 1
+        Next
+
+        For i = 1 To 26
+            If alphabet(i) > 0 Then
+                Console.WriteLine(Chr(i + 64) & " = " & alphabet(i))
+            End If
+        Next
+
+        Console.ReadKey()
+
+    End Sub
